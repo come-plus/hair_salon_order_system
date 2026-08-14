@@ -4,10 +4,4 @@ cd /mnt/c/Users/come/dev/LINE_menu/nissy
 git clone git@github.com:come-plus/hair_salon_order_system.git
 cd hair_salon_order_system
 
-code README.md
-
-git status
-git add README.md
-git commit -m 'Initial commit'
-
-git push origin main
+code .gitignore
