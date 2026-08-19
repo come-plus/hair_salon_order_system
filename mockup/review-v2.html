@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nissy Review</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: #faf6f0;
+    color: #3a3530;
+  }
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ヘッダー(海の背景) */
+  .ocean-header {
+    background: linear-gradient(180deg, #7fc7d9 0%, #a8dce6 35%, #e8f4ee 70%, #faf6f0 100%);
+    padding: 28px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ocean-header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 100%;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 3%),
+      radial-gradient(circle at 70% 15%, rgba(255,255,255,0.4) 0%, transparent 2%),
+      radial-gradient(circle at 45% 5%, rgba(255,255,255,0.5) 0%, transparent 4%);
+    pointer-events: none;
+  }
+  .logo {
+    font-family: "Brush Script MT", cursive;
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(90,110,110,0.3);
+    position: relative;
+  }
+  .logo .shell { font-size: 20px; margin-left: 4px; }
+  .logo-sub {
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 0.15em;
+    margin-top: 2px;
+    text-shadow: 0 1px 4px rgba(90,110,110,0.3);
+  }
+  .header-caption {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #5c6b6b;
+  }
+
+  /* タブ切り替え */
+  .tab-switch {
+    display: flex;
+    max-width: 480px;
+    margin: 16px auto 0;
+    background: #fff;
+    border-radius: 30px;
+    padding: 4px;
+    box-shadow: 0 3px 12px rgba(90,110,110,0.12);
+  }
+  .tab-btn {
+    flex: 1;
+    border: none;
+    background: none;
+    padding: 12px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7c8c8c;
+    border-radius: 26px;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: #4f8fa3;
+    color: #fff;
+  }
+
+  .content {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+
+  /* 一覧画面 */
+  .section-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3a3530;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: #6a5f52;
+    margin-top: 4px;
+  }
+
+  .product-card {
+    display: flex;
+    gap: 14px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .product-thumb {
+    width: 84px; height: 84px;
+    border-radius: 12px;
+    background: #f2ece2;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    color: #b0a595;
+    text-align: center;
+    overflow: hidden;
+  }
+  .product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .product-info { flex: 1; min-width: 0; }
+  .product-name { font-size: 15px; font-weight: 700; }
+  .product-brand { font-size: 12px; color: #6a5f52; margin-top: 2px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    background: #eaf3f5;
+    color: #4f8fa3;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 10px;
+  }
+  .review-count {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 11px; color: #6a5f52;
+    margin-top: 8px;
+  }
+  .chevron { color: #cfc6b8; font-size: 18px; }
+
+  .notice-text {
+    text-align: center;
+    font-size: 11px;
+    color: #6a5f52;
+    margin-top: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* 詳細画面 */
+  .detail-product-box {
+    display: flex;
+    gap: 14px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
+    margin-bottom: 16px;
+  }
+  .detail-thumb {
+    width: 70px; height: 70px;
+    border-radius: 10px;
+    background: #f2ece2;
+    flex-shrink: 0;
+  }
+  .detail-link {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #4f8fa3;
+    font-weight: 600;
+  }
+
+  .review-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
+  }
+  .reviewer-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #cfe6ec;
+    color: #4f8fa3;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .reviewer-name { font-size: 14px; font-weight: 700; }
+  .reviewer-meta { font-size: 11px; color: #6a5f52; margin-left: 6px; }
+  .use-date { font-size: 12px; color: #6a5f52; margin-left: 48px; margin-bottom: 14px; }
+
+  .photo-label { font-size: 12px; color: #6a5f52; margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .photo-item {
+    aspect-ratio: 3/4;
+    background: #f2ece2;
+    border-radius: 10px;
+    display: flex; align-items: flex-end; justify-content: center;
+    font-size: 10px;
+    color: #b0a595;
+    padding-bottom: 4px;
+  }
+
+  .qa-block { padding: 14px 0; border-top: 1px solid #f0ebe2; display: flex; gap: 12px; }
+  .qa-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #eaf3f5;
+    color: #4f8fa3;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .qa-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .qa-text { font-size: 13px; line-height: 1.8; color: #5c554c; }
+
+  .helpful-row {
+    max-width: 480px;
+    margin: 16px auto 0;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
+  }
+  .helpful-row div div:last-child { color: #6a5f52; }
+  .helpful-btn {
+    background: #fff;
+    border: 1px solid #4f8fa3;
+    color: #4f8fa3;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .nav-row {
+    max-width: 480px;
+    margin: 10px auto 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+  }
+  .nav-btn {
+    background: #fff;
+    border: 1px solid #e8e0d5;
+    border-radius: 20px;
+    padding: 10px 18px;
+    font-size: 12px;
+    color: #6a5f52;
+  }
+
+  /* 投稿案内+フォーム画面 */
+  .intro-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #5c554c;
+    margin-bottom: 16px;
+  }
+  .info-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    cursor: pointer;
+  }
+  .accordion-header h3 {
+    font-size: 14px;
+    color: #3a3530;
+  }
+  .accordion-arrow {
+    font-size: 12px;
+    color: #9a9088;
+    transition: transform 0.25s ease;
+  }
+  .accordion-header.open .accordion-arrow {
+    transform: rotate(180deg);
+  }
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+  }
+  .accordion-body.open {
+    max-height: 1200px;
+    padding: 0 20px 20px;
+  }
+  .info-box ul { list-style: none; }
+  .info-box li {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #5c554c;
+    margin-bottom: 10px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .info-box li::before {
+    content: "・";
+    position: absolute;
+    left: 0;
+  }
+  .info-box li .sub { display: block; font-size: 11px; color: #6a5f52; margin-top: 2px; }
+  .benefit-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #4f8fa3;
+  }
+  .benefit-item { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid #f0ebe2; }
+  .benefit-item:first-of-type { border-top: none; }
+  .benefit-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #eaf3f5;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .benefit-badge {
+    display: inline-block;
+    background: #eaf3f5;
+    color: #4f8fa3;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin: 10px 0 4px;
+  }
+  .benefit-count {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #cfe6ec;
+    color: #2f5f6f;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .benefit-text { font-size: 12px; line-height: 1.7; color: #5c554c; }
+
+  .required { color: #d98a8a; margin-left: 2px; }
+  .select-box, .input-box, .textarea-box {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e8e0d5;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 13px;
+    color: #3a3530;
+  }
+  .textarea-box { resize: none; height: 70px; font-family: inherit; }
+
+  .primary-btn {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 20px auto 0;
+    background: #4f8fa3;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .form-group { margin-top: 18px; }
+  .form-group-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .form-hint { font-size: 11px; color: #6a5f52; margin-top: 6px; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .image-add {
+    aspect-ratio: 1;
+    border: 1.5px dashed #cfc6b8;
+    border-radius: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+    color: #b0a595;
+    font-size: 10px;
+  }
+  .image-add .plus { font-size: 18px; }
+
+  .footnote-box {
+    background: #f5f0e8;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 18px;
+    font-size: 11px;
+    color: #7c7264;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ 画面1: レビュー一覧 ============ -->
+  <div class="screen active" id="screen-list">
+    <div class="ocean-header">
+      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo-sub">— Review —</div>
+      <div class="header-caption">実際に使ったお客様の声</div>
+      <div class="tab-switch">
+        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-title-row">
+        <div>
+          <div class="section-title">✨ レビューがある商品から探す</div>
+          <div class="section-sub">気になる商品をタップしてください</div>
+        </div>
+      </div>
+
+      <a class="product-card" onclick="showScreen('screen-detail')">
+        <div class="product-thumb">商品画像</div>
+        <div class="product-info">
+          <div class="product-name">イオンヘアシャンプー H</div>
+          <div class="product-brand">アルピション</div>
+          <div class="tag-row">
+            <span class="tag">頭皮ケア</span>
+            <span class="tag">保湿</span>
+            <span class="tag">ダメージケア</span>
+          </div>
+          <div class="review-count">💬 8件のレビュー</div>
+        </div>
+        <div class="chevron">›</div>
+      </a>
+
+      <a class="product-card" onclick="showScreen('screen-detail')">
+        <div class="product-thumb">商品画像</div>
+        <div class="product-info">
+          <div class="product-name">オイ シャンプー</div>
+          <div class="product-brand">ダヴィネス</div>
+          <div class="tag-row">
+            <span class="tag">保湿</span>
+            <span class="tag">ツヤ</span>
+            <span class="tag">まとまり</span>
+          </div>
+          <div class="review-count">💬 12件のレビュー</div>
+        </div>
+        <div class="chevron">›</div>
+      </a>
+
+      <a class="product-card" onclick="showScreen('screen-detail')">
+        <div class="product-thumb">商品画像</div>
+        <div class="product-info">
+          <div class="product-name">モイストリペア シャンプー</div>
+          <div class="product-brand">ムーランエムーラン</div>
+          <div class="tag-row">
+            <span class="tag">カラーケア</span>
+            <span class="tag">ダメージケア</span>
+            <span class="tag">うるおい</span>
+          </div>
+          <div class="review-count">💬 5件のレビュー</div>
+        </div>
+        <div class="chevron">›</div>
+      </a>
+
+      <a class="product-card" onclick="showScreen('screen-detail')">
+        <div class="product-thumb">商品画像</div>
+        <div class="product-info">
+          <div class="product-name">ビューテック ドライヤープロ</div>
+          <div class="product-brand">B happy（リファ）</div>
+          <div class="tag-row">
+            <span class="tag">ツヤ</span>
+            <span class="tag">ダメージケア</span>
+          </div>
+          <div class="review-count">💬 9件のレビュー</div>
+        </div>
+        <div class="chevron">›</div>
+      </a>
+
+      <div class="notice-text">💬 レビューはお客様の感想です。効果には個人差があります。</div>
+    </div>
+  </div>
+
+  <!-- ============ 画面2: レビュー詳細 ============ -->
+  <div class="screen" id="screen-detail">
+    <div class="ocean-header">
+      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo-sub">— Review —</div>
+      <div class="header-caption">実際に使ったお客様の声</div>
+      <div class="tab-switch">
+        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="detail-product-box">
+        <div class="detail-thumb"></div>
+        <div>
+          <div class="product-name">イオンヘアシャンプー H</div>
+          <div class="product-brand">アルピション</div>
+          <div class="tag-row">
+            <span class="tag">頭皮ケア</span>
+            <span class="tag">保湿</span>
+            <span class="tag">ダメージケア</span>
+          </div>
+          <a class="detail-link">› この商品の詳細を見る</a>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="reviewer-row">
+          <div class="avatar">M</div>
+          <div>
+            <span class="reviewer-name">Mさん</span>
+            <span class="reviewer-meta">30代 / 女性</span>
+          </div>
+        </div>
+        <div class="use-date">使用時期：2026年6月</div>
+
+        <div class="photo-label">📷 写真（最大4枚）</div>
+        <div class="photo-grid">
+          <div class="photo-item">Before</div>
+          <div class="photo-item">After</div>
+          <div class="photo-item">使用中</div>
+          <div class="photo-item">ボトル</div>
+        </div>
+
+        <div class="qa-block" style="border-top:none; padding-top:0;">
+          <div class="qa-icon">📅</div>
+          <div>
+            <div class="qa-title">使用年月日</div>
+            <div class="qa-text">2026年6月</div>
+          </div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-icon">👤</div>
+          <div>
+            <div class="qa-title">お悩み</div>
+            <div class="qa-text">頭皮の乾燥と、髪のパサつき・広がりが気になっていました。</div>
+          </div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-icon">✨</div>
+          <div>
+            <div class="qa-title">使ってどう変わったか</div>
+            <div class="qa-text">洗い上がりからしっとりして、乾かした後もまとまりがよくなりました。頭皮のかゆみも気にならなくなり、髪にツヤが出てきた気がします。</div>
+          </div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-icon">♡</div>
+          <div>
+            <div class="qa-title">気に入っている点</div>
+            <div class="qa-text">泡立ちがとてもよく、香りもやさしくて癒されます。少量でもしっかり洗えるのも嬉しいです。</div>
+          </div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-icon">💬</div>
+          <div>
+            <div class="qa-title">感想</div>
+            <div class="qa-text">サロンでおすすめされて使い始めましたが、本当に買ってよかったです！これからも使い続けたいと思います。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="helpful-row">
+      <div>
+        <div style="font-size:12px; font-weight:700;">♡ 参考になった</div>
+        <div style="font-size:11px; color:#6a5f52; margin-top:2px;">12人が参考にしています</div>
+      </div>
+      <button class="helpful-btn">♡ 参考になった！</button>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn">← 前のレビュー</button>
+      <button class="nav-btn">次のレビュー →</button>
+    </div>
+    <div style="height:20px;"></div>
+  </div>
+
+  <!-- ============ 画面3: 投稿（案内+フォーム統合） ============ -->
+  <div class="screen" id="screen-intro">
+    <div class="ocean-header">
+      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo-sub">— Review —</div>
+      <div class="header-caption">実際に使ったお客様の声</div>
+      <div class="tab-switch">
+        <button class="tab-btn" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn active">✏️ 投稿する</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <p class="intro-text">
+        いつもご利用いただきありがとうございます☺<br>
+        実際に使ってみた感想やお髪やお肌の変化などを教えていただけると嬉しいです<br>
+        皆さまのお声が、これから商品を選ぶ方の安心につながります<br>
+        ご協力いただいた方には、ささやかですがプレゼントをご用意しております
+      </p>
+
+      <div class="info-box">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3>レビュー投稿について</h3>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+        <ul>
+          <li>当店でご購入いただいた商品のみ対象です
+            <span class="sub">インターネット・他店で購入された商品は対象外となります<br>※当店経由の公式サイト（ダヴィネス、ムーランエムーラン、B happy）は対象となります</span>
+          </li>
+          <li>購入日から1年以内の商品が対象となります
+            <span class="sub">✨ただし美容家電など使用期限のないものは購入日は問いません✨</span>
+          </li>
+          <li>サンプル・テスター・試供品は対象外です</li>
+          <li>投稿いただいた文章・写真は、個人が特定されない形で当店のLINE・店内・今後の販促物などで使用させていただく場合があります
+            <span class="sub">※写真掲載をご希望されない場合は、写真の投稿をお控え下さい</span>
+          </li>
+          <li>プレゼントは1商品につき1回までとなります
+            <span class="sub">※最初の投稿から1年後、同じ商品を継続使用されている場合は改めて投稿が可能となります</span>
+          </li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3 class="benefit-title" style="margin-bottom:0;">レビュー特典</h3>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+
+        <div class="benefit-item">
+          <div class="benefit-icon">🎁</div>
+          <div class="benefit-text">
+            <strong>コメントのみ</strong><br>
+            1回につきお好きなサシェ2枚プレゼント<br>
+            ※シャンプー＆トリートメントセットは1セット（各1枚）
+          </div>
+        </div>
+
+        <span class="benefit-badge">最初の投稿から1年以内に</span>
+
+        <div class="benefit-item">
+          <div class="benefit-count">5回</div>
+          <div class="benefit-text">コメントのみ 5回達成で、1,000円分のオプションからお好きなメニュー1回分を無料でプレゼント</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-count">10回</div>
+          <div class="benefit-text">コメントのみ 10回達成で、1,000円分のオプションからお好きなメニュー3回分無料プレゼント</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📷</div>
+          <div class="benefit-text">写真付きレビュー1回につき、1,000円分のオプションメニューからお好きなメニュー1回分無料プレゼント</div>
+        </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">🧴 商品<span class="required">*</span></div>
+        <select class="select-box">
+          <option>商品を選択してください</option>
+        </select>
+        <div class="form-hint">当店でご購入いただいた商品を選択してください</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">📅 使用年月日<span class="required">*</span></div>
+        <input class="input-box" placeholder="年 / 月を選択してください">
+        <div class="form-hint">いつ頃使用し始めましたか？</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">👤 お悩み<span class="required">*</span></div>
+        <textarea class="textarea-box" placeholder="例）パサつき、うねり、乾燥、頭皮のかゆみ など"></textarea>
+        <div class="form-hint">使用前のお悩みを教えてください</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">✨ 使ってどう変わったか<span class="required">*</span></div>
+        <textarea class="textarea-box" placeholder="例）髪がしっとりまとまるようになった、広がりが落ち着いた など" style="height:90px;"></textarea>
+        <div class="form-hint">使用してからの変化を具体的に教えてください（100文字以上推奨）</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">♡ 気に入っている点（任意）</div>
+        <textarea class="textarea-box" placeholder="例）香り、泡立ち、仕上がり、テクスチャー など"></textarea>
+        <div class="form-hint">この商品の特に気に入っている点はありますか？</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">💬 感想（任意）</div>
+        <textarea class="textarea-box" placeholder="自由にご感想をお聞かせください"></textarea>
+        <div class="form-hint">その他、ご自由にご感想をお聞かせください</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-group-label">📷 画像（最大4枚） <span style="font-size:10px; color:#6a5f52; font-weight:400;">任意</span></div>
+        <div class="image-grid">
+          <div class="image-add"><span class="plus">＋</span>画像を追加</div>
+          <div class="image-add"><span class="plus">＋</span>画像を追加</div>
+          <div class="image-add"><span class="plus">＋</span>画像を追加</div>
+          <div class="image-add"><span class="plus">＋</span>画像を追加</div>
+        </div>
+        <div class="form-hint">Before / After や使用中の様子など（1枚につき5MB以内、JPG/PNG）</div>
+      </div>
+
+      <div class="footnote-box">
+        ・当店でご購入いただいた商品のみ対象です（詳細はページ下部をご確認ください）<br>
+        ・購入日から1年以内の商品が対象となります<br>
+        ・写真掲載をご希望されない場合は、写真の投稿をお控えください<br>
+        ・プレゼントは1商品につき1回までとなります
+      </div>
+
+      <button class="primary-btn">投稿する ›</button>
+      <div style="height:20px;"></div>
+    </div>
+  </div>
+
+  <script>
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function toggleAccordion(header) {
+      header.classList.toggle('open');
+      header.nextElementSibling.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
