@@ -5,3 +5,8 @@ git clone git@github.com:come-plus/hair_salon_order_system.git
 cd hair_salon_order_system
 
 code .gitignore
+
+
+2026/08/18
+
+mkdir mockup
