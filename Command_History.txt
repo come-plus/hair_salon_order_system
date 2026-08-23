@@ -10,3 +10,8 @@ code .gitignore
 2026/08/18
 
 mkdir mockup
+
+
+2026/08/23
+
+mkdir mockup/images
