@@ -39,7 +39,8 @@
     text-shadow: 0 2px 6px rgba(90,110,110,0.3);
     position: relative;
   }
-  .logo .shell { font-size: 20px; margin-left: 4px; }
+  .logo .book-icon { width: 32px; height: 32px; vertical-align: middle; }
+  .tab-icon { width: 15px; height: 15px; vertical-align: middle; margin-right: 2px; }
   .logo-sub {
     font-size: 12px;
     color: #fff;
@@ -73,11 +74,16 @@
     color: #7c8c8c;
     border-radius: 26px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
   }
   .tab-btn.active {
     background: #4f8fa3;
     color: #fff;
   }
+  .tab-icon { width: 24px; height: 24px; object-fit: contain; }
 
   .content {
     max-width: 480px;
@@ -99,7 +105,7 @@
   }
   .section-sub {
     font-size: 12px;
-    color: #6a5f52;
+    color: #2a2520;
     margin-top: 4px;
   }
 
@@ -130,7 +136,7 @@
   .product-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .product-info { flex: 1; min-width: 0; }
   .product-name { font-size: 15px; font-weight: 700; }
-  .product-brand { font-size: 12px; color: #6a5f52; margin-top: 2px; }
+  .product-brand { font-size: 12px; color: #2a2520; margin-top: 2px; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .tag {
     background: #eaf3f5;
@@ -141,7 +147,7 @@
   }
   .review-count {
     display: flex; align-items: center; gap: 4px;
-    font-size: 11px; color: #6a5f52;
+    font-size: 11px; color: #2a2520;
     margin-top: 8px;
   }
   .chevron { color: #cfc6b8; font-size: 18px; }
@@ -149,7 +155,7 @@
   .notice-text {
     text-align: center;
     font-size: 11px;
-    color: #6a5f52;
+    color: #2a2520;
     margin-top: 8px;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
@@ -199,10 +205,10 @@
     font-weight: 700;
   }
   .reviewer-name { font-size: 14px; font-weight: 700; }
-  .reviewer-meta { font-size: 11px; color: #6a5f52; margin-left: 6px; }
-  .use-date { font-size: 12px; color: #6a5f52; margin-left: 48px; margin-bottom: 14px; }
+  .reviewer-meta { font-size: 11px; color: #2a2520; margin-left: 6px; }
+  .use-date { font-size: 12px; color: #2a2520; margin-left: 48px; margin-bottom: 14px; }
 
-  .photo-label { font-size: 12px; color: #6a5f52; margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
+  .photo-label { font-size: 12px; color: #2a2520; margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
   .photo-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -243,7 +249,7 @@
     align-items: center;
     box-shadow: 0 2px 10px rgba(90,110,110,0.08);
   }
-  .helpful-row div div:last-child { color: #6a5f52; }
+  .helpful-row div div:last-child { color: #2a2520; }
   .helpful-btn {
     background: #fff;
     border: 1px solid #4f8fa3;
@@ -266,7 +272,7 @@
     border-radius: 20px;
     padding: 10px 18px;
     font-size: 12px;
-    color: #6a5f52;
+    color: #2a2520;
   }
 
   /* 投稿案内+フォーム画面 */
@@ -292,7 +298,7 @@
   }
   .accordion-header h3 {
     font-size: 14px;
-    color: #3a3530;
+    color: #4f8fa3;
   }
   .accordion-arrow {
     font-size: 12px;
@@ -326,7 +332,7 @@
     position: absolute;
     left: 0;
   }
-  .info-box li .sub { display: block; font-size: 11px; color: #6a5f52; margin-top: 2px; }
+  .info-box li .sub { display: block; font-size: 11px; color: #2a2520; margin-top: 2px; }
   .benefit-title {
     font-size: 15px;
     font-weight: 700;
@@ -398,9 +404,10 @@
     gap: 6px;
     font-size: 13px;
     font-weight: 700;
+    color: #4f8fa3;
     margin-bottom: 8px;
   }
-  .form-hint { font-size: 11px; color: #6a5f52; margin-top: 6px; }
+  .form-hint { font-size: 11px; color: #2a2520; margin-top: 6px; }
 
   .image-grid {
     display: grid;
@@ -435,12 +442,12 @@
   <!-- ============ 画面1: レビュー一覧 ============ -->
   <div class="screen active" id="screen-list">
     <div class="ocean-header">
-      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo">Nissy<img class="book-icon" src="./images/book-icon.png" alt=""></div>
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
         <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
-        <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
+        <button class="tab-btn" onclick="showScreen('screen-intro')"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
 
@@ -518,12 +525,12 @@
   <!-- ============ 画面2: レビュー詳細 ============ -->
   <div class="screen" id="screen-detail">
     <div class="ocean-header">
-      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo">Nissy<img class="book-icon" src="./images/book-icon.png" alt=""></div>
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
         <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
-        <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
+        <button class="tab-btn" onclick="showScreen('screen-intro')"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
 
@@ -615,12 +622,12 @@
   <!-- ============ 画面3: 投稿（案内+フォーム統合） ============ -->
   <div class="screen" id="screen-intro">
     <div class="ocean-header">
-      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo">Nissy<img class="book-icon" src="./images/book-icon.png" alt=""></div>
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
         <button class="tab-btn" onclick="showScreen('screen-list')">💬 レビューを見る</button>
-        <button class="tab-btn active">✏️ 投稿する</button>
+        <button class="tab-btn active"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
 
