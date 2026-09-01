@@ -10,7 +10,6 @@
     font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
     background: #faf6f0;
     color: #3a3530;
-    padding-bottom: 70px;
   }
   .screen { display: none; }
   .screen.active { display: block; }
@@ -53,23 +52,6 @@
     font-size: 13px;
     color: #5c6b6b;
   }
-  .back-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-  }
-  .icon-btn {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.85);
-    border: none;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    color: #4a5a5a;
-    cursor: pointer;
-  }
-  .header-actions { display: flex; gap: 8px; }
 
   /* タブ切り替え */
   .tab-switch {
@@ -117,7 +99,7 @@
   }
   .section-sub {
     font-size: 12px;
-    color: #9a9088;
+    color: #6a5f52;
     margin-top: 4px;
   }
 
@@ -148,7 +130,7 @@
   .product-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .product-info { flex: 1; min-width: 0; }
   .product-name { font-size: 15px; font-weight: 700; }
-  .product-brand { font-size: 12px; color: #9a9088; margin-top: 2px; }
+  .product-brand { font-size: 12px; color: #6a5f52; margin-top: 2px; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .tag {
     background: #eaf3f5;
@@ -159,7 +141,7 @@
   }
   .review-count {
     display: flex; align-items: center; gap: 4px;
-    font-size: 11px; color: #9a9088;
+    font-size: 11px; color: #6a5f52;
     margin-top: 8px;
   }
   .chevron { color: #cfc6b8; font-size: 18px; }
@@ -167,7 +149,7 @@
   .notice-text {
     text-align: center;
     font-size: 11px;
-    color: #a89f92;
+    color: #6a5f52;
     margin-top: 8px;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
@@ -217,8 +199,8 @@
     font-weight: 700;
   }
   .reviewer-name { font-size: 14px; font-weight: 700; }
-  .reviewer-meta { font-size: 11px; color: #9a9088; margin-left: 6px; }
-  .use-date { font-size: 12px; color: #9a9088; margin-left: 48px; margin-bottom: 14px; }
+  .reviewer-meta { font-size: 11px; color: #6a5f52; margin-left: 6px; }
+  .use-date { font-size: 12px; color: #6a5f52; margin-left: 48px; margin-bottom: 14px; }
 
   .photo-label { font-size: 12px; color: #6a5f52; margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
   .photo-grid {
@@ -261,6 +243,7 @@
     align-items: center;
     box-shadow: 0 2px 10px rgba(90,110,110,0.08);
   }
+  .helpful-row div div:last-child { color: #6a5f52; }
   .helpful-btn {
     background: #fff;
     border: 1px solid #4f8fa3;
@@ -343,7 +326,7 @@
     position: absolute;
     left: 0;
   }
-  .info-box li .sub { display: block; font-size: 11px; color: #9a9088; margin-top: 2px; }
+  .info-box li .sub { display: block; font-size: 11px; color: #6a5f52; margin-top: 2px; }
   .benefit-title {
     font-size: 15px;
     font-weight: 700;
@@ -408,24 +391,6 @@
     text-align: center;
   }
 
-  .form-intro-box {
-    display: flex;
-    gap: 12px;
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 2px 10px rgba(90,110,110,0.08);
-    margin-bottom: 4px;
-  }
-  .form-intro-icon {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: #e0d8cb;
-    flex-shrink: 0;
-  }
-  .form-intro-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .form-intro-text { font-size: 11px; color: #9a9088; line-height: 1.6; }
-
   .form-group { margin-top: 18px; }
   .form-group-label {
     display: flex;
@@ -435,7 +400,7 @@
     font-weight: 700;
     margin-bottom: 8px;
   }
-  .form-hint { font-size: 11px; color: #9a9088; margin-top: 6px; }
+  .form-hint { font-size: 11px; color: #6a5f52; margin-top: 6px; }
 
   .image-grid {
     display: grid;
@@ -463,24 +428,6 @@
     color: #7c7264;
     line-height: 1.8;
   }
-
-  /* ボトムナビ */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: #fff;
-    border-top: 1px solid #f0ebe2;
-    display: flex;
-    padding: 10px 0 14px;
-  }
-  .bottom-nav-item {
-    flex: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    font-size: 10px;
-    color: #b0a595;
-  }
-  .bottom-nav-item.active { color: #4f8fa3; }
-  .bottom-nav-icon { font-size: 18px; }
 </style>
 </head>
 <body>
@@ -492,7 +439,7 @@
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
-        <button class="tab-btn active">💬 レビューを見る</button>
+        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
         <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
       </div>
     </div>
@@ -571,15 +518,13 @@
   <!-- ============ 画面2: レビュー詳細 ============ -->
   <div class="screen" id="screen-detail">
     <div class="ocean-header">
-      <div class="back-row">
-        <button class="icon-btn" onclick="showScreen('screen-list')">‹</button>
-        <div class="logo" style="font-size:26px;">Nissy <span class="shell" style="font-size:14px;">🐚</span> <span style="font-size:14px; font-family: 'Hiragino Kaku Gothic ProN';">Review</span></div>
-        <div class="header-actions">
-          <button class="icon-btn">♡</button>
-          <button class="icon-btn">↗</button>
-        </div>
+      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo-sub">— Review —</div>
+      <div class="header-caption">実際に使ったお客様の声</div>
+      <div class="tab-switch">
+        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn" onclick="showScreen('screen-intro')">✏️ 投稿する</button>
       </div>
-      <div class="header-caption">— 実際に使ったお客様の声 —</div>
     </div>
 
     <div class="content">
@@ -656,7 +601,7 @@
     <div class="helpful-row">
       <div>
         <div style="font-size:12px; font-weight:700;">♡ 参考になった</div>
-        <div style="font-size:11px; color:#9a9088; margin-top:2px;">12人が参考にしています</div>
+        <div style="font-size:11px; color:#6a5f52; margin-top:2px;">12人が参考にしています</div>
       </div>
       <button class="helpful-btn">♡ 参考になった！</button>
     </div>
@@ -670,12 +615,13 @@
   <!-- ============ 画面3: 投稿（案内+フォーム統合） ============ -->
   <div class="screen" id="screen-intro">
     <div class="ocean-header">
-      <div class="back-row">
-        <button class="icon-btn" onclick="showScreen('screen-list')">‹</button>
-        <div style="flex:1;"></div>
+      <div class="logo">Nissy <span class="shell">🐚</span></div>
+      <div class="logo-sub">— Review —</div>
+      <div class="header-caption">実際に使ったお客様の声</div>
+      <div class="tab-switch">
+        <button class="tab-btn" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn active">✏️ 投稿する</button>
       </div>
-      <div class="logo" style="font-size:32px;">Nissy <span class="shell" style="font-size:16px;">🐚</span> <span style="font-size:16px; font-family:'Hiragino Kaku Gothic ProN';">Review</span></div>
-      <div class="header-caption">— レビューを投稿する —</div>
     </div>
 
     <div class="content">
@@ -743,14 +689,6 @@
         </div>
       </div>
 
-      <div class="form-intro-box">
-        <div class="form-intro-icon"></div>
-        <div>
-          <div class="form-intro-title">実際に使ってみた感想や変化を教えてください</div>
-          <div class="form-intro-text">皆さまのお声が、これから商品を選ぶ方の安心につながります♡<br>ご協力いただいた方には、ささやかなプレゼントをご用意しております</div>
-        </div>
-      </div>
-
       <div class="form-group">
         <div class="form-group-label">🧴 商品<span class="required">*</span></div>
         <select class="select-box">
@@ -790,7 +728,7 @@
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">📷 画像（最大4枚） <span style="font-size:10px; color:#9a9088; font-weight:400;">任意</span></div>
+        <div class="form-group-label">📷 画像（最大4枚） <span style="font-size:10px; color:#6a5f52; font-weight:400;">任意</span></div>
         <div class="image-grid">
           <div class="image-add"><span class="plus">＋</span>画像を追加</div>
           <div class="image-add"><span class="plus">＋</span>画像を追加</div>
@@ -809,22 +747,6 @@
 
       <button class="primary-btn">投稿する ›</button>
       <div style="height:20px;"></div>
-    </div>
-  </div>
-
-  <!-- ボトムナビ -->
-  <div class="bottom-nav">
-    <div class="bottom-nav-item active">
-      <span class="bottom-nav-icon">🏠</span>
-      ホーム
-    </div>
-    <div class="bottom-nav-item">
-      <span class="bottom-nav-icon">💬</span>
-      レビュー
-    </div>
-    <div class="bottom-nav-item">
-      <span class="bottom-nav-icon">ⓘ</span>
-      ご利用について
     </div>
   </div>
 
