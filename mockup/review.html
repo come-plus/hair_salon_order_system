@@ -84,6 +84,9 @@
     color: #fff;
   }
   .tab-icon { width: 24px; height: 24px; object-fit: contain; }
+  .count-icon { width: 13px; height: 13px; vertical-align: middle; object-fit: contain; }
+  .label-icon { width: 16px; height: 16px; vertical-align: middle; object-fit: contain; }
+  .inline-icon { width: 14px; height: 14px; vertical-align: middle; object-fit: contain; }
 
   .content {
     max-width: 480px;
@@ -236,7 +239,7 @@
     font-size: 14px;
   }
   .qa-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .qa-text { font-size: 13px; line-height: 1.8; color: #5c554c; }
+  .qa-text { font-size: 13px; line-height: 1.8; color: #5c4a38; }
 
   .helpful-row {
     max-width: 480px;
@@ -249,7 +252,7 @@
     align-items: center;
     box-shadow: 0 2px 10px rgba(90,110,110,0.08);
   }
-  .helpful-row div div:last-child { color: #2a2520; }
+  .helpful-row div div:last-child { color: #5c4a38; }
   .helpful-btn {
     background: #fff;
     border: 1px solid #4f8fa3;
@@ -279,7 +282,8 @@
   .intro-text {
     font-size: 13px;
     line-height: 1.9;
-    color: #5c554c;
+    color: #3d2b1f;
+    font-weight: 700;
     margin-bottom: 16px;
   }
   .info-box {
@@ -322,7 +326,7 @@
   .info-box li {
     font-size: 12px;
     line-height: 1.8;
-    color: #5c554c;
+    color: #5c4a38;
     margin-bottom: 10px;
     padding-left: 14px;
     position: relative;
@@ -368,7 +372,7 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .benefit-text { font-size: 12px; line-height: 1.7; color: #5c554c; }
+  .benefit-text { font-size: 12px; line-height: 1.7; color: #5c4a38; }
 
   .required { color: #d98a8a; margin-left: 2px; }
   .select-box, .input-box, .textarea-box {
@@ -432,7 +436,7 @@
     padding: 14px;
     margin-top: 18px;
     font-size: 11px;
-    color: #7c7264;
+    color: #5c4a38;
     line-height: 1.8;
   }
 </style>
@@ -446,7 +450,7 @@
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
-        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn active" onclick="showScreen('screen-list')"><img class="tab-icon" src="./images/review-icon.png" alt="">レビューを見る</button>
         <button class="tab-btn" onclick="showScreen('screen-intro')"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
@@ -469,7 +473,7 @@
             <span class="tag">保湿</span>
             <span class="tag">ダメージケア</span>
           </div>
-          <div class="review-count">💬 8件のレビュー</div>
+          <div class="review-count"><img class="count-icon" src="./images/review-icon.png" alt=""> 8件のレビュー</div>
         </div>
         <div class="chevron">›</div>
       </a>
@@ -484,7 +488,7 @@
             <span class="tag">ツヤ</span>
             <span class="tag">まとまり</span>
           </div>
-          <div class="review-count">💬 12件のレビュー</div>
+          <div class="review-count"><img class="count-icon" src="./images/review-icon.png" alt=""> 12件のレビュー</div>
         </div>
         <div class="chevron">›</div>
       </a>
@@ -499,7 +503,7 @@
             <span class="tag">ダメージケア</span>
             <span class="tag">うるおい</span>
           </div>
-          <div class="review-count">💬 5件のレビュー</div>
+          <div class="review-count"><img class="count-icon" src="./images/review-icon.png" alt=""> 5件のレビュー</div>
         </div>
         <div class="chevron">›</div>
       </a>
@@ -513,7 +517,7 @@
             <span class="tag">ツヤ</span>
             <span class="tag">ダメージケア</span>
           </div>
-          <div class="review-count">💬 9件のレビュー</div>
+          <div class="review-count"><img class="count-icon" src="./images/review-icon.png" alt=""> 9件のレビュー</div>
         </div>
         <div class="chevron">›</div>
       </a>
@@ -529,7 +533,7 @@
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
-        <button class="tab-btn active" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn active" onclick="showScreen('screen-list')"><img class="tab-icon" src="./images/review-icon.png" alt="">レビューを見る</button>
         <button class="tab-btn" onclick="showScreen('screen-intro')"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
@@ -559,7 +563,7 @@
         </div>
         <div class="use-date">使用時期：2026年6月</div>
 
-        <div class="photo-label">📷 写真（最大4枚）</div>
+        <div class="photo-label"><img class="inline-icon" src="./images/camera-icon.png" alt=""> 写真（最大4枚）</div>
         <div class="photo-grid">
           <div class="photo-item">Before</div>
           <div class="photo-item">After</div>
@@ -608,7 +612,7 @@
     <div class="helpful-row">
       <div>
         <div style="font-size:12px; font-weight:700;">♡ 参考になった</div>
-        <div style="font-size:11px; color:#6a5f52; margin-top:2px;">12人が参考にしています</div>
+        <div style="font-size:11px; color:#5c4a38; margin-top:2px;">12人が参考にしています</div>
       </div>
       <button class="helpful-btn">♡ 参考になった！</button>
     </div>
@@ -626,14 +630,14 @@
       <div class="logo-sub">— Review —</div>
       <div class="header-caption">実際に使ったお客様の声</div>
       <div class="tab-switch">
-        <button class="tab-btn" onclick="showScreen('screen-list')">💬 レビューを見る</button>
+        <button class="tab-btn" onclick="showScreen('screen-list')"><img class="tab-icon" src="./images/review-icon.png" alt="">レビューを見る</button>
         <button class="tab-btn active"><img class="tab-icon" src="./images/pen-icon.png" alt="">投稿する</button>
       </div>
     </div>
 
     <div class="content">
       <p class="intro-text">
-        いつもご利用いただきありがとうございます☺<br>
+        いつもご利用いただきありがとうございます<img class="inline-icon" src="./images/smile-icon.png" alt=""><br>
         実際に使ってみた感想やお髪やお肌の変化などを教えていただけると嬉しいです<br>
         皆さまのお声が、これから商品を選ぶ方の安心につながります<br>
         ご協力いただいた方には、ささやかですがプレゼントをご用意しております
@@ -650,7 +654,7 @@
             <span class="sub">インターネット・他店で購入された商品は対象外となります<br>※当店経由の公式サイト（ダヴィネス、ムーランエムーラン、B happy）は対象となります</span>
           </li>
           <li>購入日から1年以内の商品が対象となります
-            <span class="sub">✨ただし美容家電など使用期限のないものは購入日は問いません✨</span>
+            <span class="sub"><img class="inline-icon" src="./images/sparkle-icon.png" alt="">ただし美容家電など使用期限のないものは購入日は問いません<img class="inline-icon" src="./images/sparkle-icon.png" alt=""></span>
           </li>
           <li>サンプル・テスター・試供品は対象外です</li>
           <li>投稿いただいた文章・写真は、個人が特定されない形で当店のLINE・店内・今後の販促物などで使用させていただく場合があります
@@ -671,7 +675,7 @@
         <div class="accordion-body">
 
         <div class="benefit-item">
-          <div class="benefit-icon">🎁</div>
+          <div class="benefit-icon"><img class="inline-icon" src="./images/gift-icon.png" alt=""></div>
           <div class="benefit-text">
             <strong>コメントのみ</strong><br>
             1回につきお好きなサシェ2枚プレゼント<br>
@@ -690,14 +694,14 @@
           <div class="benefit-text">コメントのみ 10回達成で、1,000円分のオプションからお好きなメニュー3回分無料プレゼント</div>
         </div>
         <div class="benefit-item">
-          <div class="benefit-icon">📷</div>
+          <div class="benefit-icon"><img class="inline-icon" src="./images/camera-icon.png" alt=""></div>
           <div class="benefit-text">写真付きレビュー1回につき、1,000円分のオプションメニューからお好きなメニュー1回分無料プレゼント</div>
         </div>
         </div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">🧴 商品<span class="required">*</span></div>
+        <div class="form-group-label"><img class="label-icon" src="./images/product-icon.png" alt="">商品<span class="required">*</span></div>
         <select class="select-box">
           <option>商品を選択してください</option>
         </select>
@@ -705,37 +709,37 @@
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">📅 使用年月日<span class="required">*</span></div>
+        <div class="form-group-label"><img class="label-icon" src="./images/calendar-icon.png" alt="">使用年月日<span class="required">*</span></div>
         <input class="input-box" placeholder="年 / 月を選択してください">
         <div class="form-hint">いつ頃使用し始めましたか？</div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">👤 お悩み<span class="required">*</span></div>
+        <div class="form-group-label"><img class="label-icon" src="./images/worry-icon.png" alt="">お悩み<span class="required">*</span></div>
         <textarea class="textarea-box" placeholder="例）パサつき、うねり、乾燥、頭皮のかゆみ など"></textarea>
         <div class="form-hint">使用前のお悩みを教えてください</div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">✨ 使ってどう変わったか<span class="required">*</span></div>
+        <div class="form-group-label"><img class="label-icon" src="./images/sparkle-icon.png" alt="">使ってどう変わったか<span class="required">*</span></div>
         <textarea class="textarea-box" placeholder="例）髪がしっとりまとまるようになった、広がりが落ち着いた など" style="height:90px;"></textarea>
         <div class="form-hint">使用してからの変化を具体的に教えてください（100文字以上推奨）</div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">♡ 気に入っている点（任意）</div>
+        <div class="form-group-label"><img class="label-icon" src="./images/heart-icon.png" alt="">気に入っている点（任意）</div>
         <textarea class="textarea-box" placeholder="例）香り、泡立ち、仕上がり、テクスチャー など"></textarea>
         <div class="form-hint">この商品の特に気に入っている点はありますか？</div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">💬 感想（任意）</div>
+        <div class="form-group-label"><img class="label-icon" src="./images/review-icon.png" alt="">感想（任意）</div>
         <textarea class="textarea-box" placeholder="自由にご感想をお聞かせください"></textarea>
         <div class="form-hint">その他、ご自由にご感想をお聞かせください</div>
       </div>
 
       <div class="form-group">
-        <div class="form-group-label">📷 画像（最大4枚） <span style="font-size:10px; color:#6a5f52; font-weight:400;">任意</span></div>
+        <div class="form-group-label"><img class="label-icon" src="./images/camera-icon.png" alt="">画像（最大4枚） <span style="font-size:10px; color:#5c4a38; font-weight:400;">任意</span></div>
         <div class="image-grid">
           <div class="image-add"><span class="plus">＋</span>画像を追加</div>
           <div class="image-add"><span class="plus">＋</span>画像を追加</div>
