@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B happyご登録時のご案内</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @font-face {
+    font-family: "NicomojiPlus";
+    src: url("./fonts/nicomoji-plus_v2-5.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  body {
+    /* ニコモジ＋は可読性確認のため一時的に無効化 */
+    /* font-family: "NicomojiPlus", sans-serif; */
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: #faf7f2;
+    color: #7b5d3e;
+    padding: 24px 16px 60px;
+  }
+  .back-link {
+    display: block;
+    max-width: 420px;
+    margin: 0 auto 20px;
+    font-size: 20px;
+    color: #4a371a;
+    text-decoration: none;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.05em;
+  }
+  .content {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .box {
+    background: #fff;
+    border: 1px solid #e8e0d5;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(58, 47, 40, 0.06);
+  }
+  .box p {
+    font-size: 20px;
+    line-height: 1.9;
+    color: #484037;
+  }
+  .screenshot {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #e8e0d5;
+    margin-top: 16px;
+  }
+  .step-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #3a2f28;
+    margin-bottom: 14px;
+  }
+  .highlight {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #e8b86d;
+    text-underline-offset: 3px;
+  }
+  .setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #faf5eb;
+    border-radius: 8px;
+  }
+  .setting-label {
+    font-size: 20px;
+    color: #322c21;
+  }
+  .setting-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #452e10;
+  }
+  .step-list {
+    counter-reset: step;
+    margin-top: 4px;
+  }
+  .step-item {
+    position: relative;
+    padding-left: 34px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #5c4a38;
+  }
+  .step-item:last-child {
+    margin-bottom: 0;
+  }
+  .step-item::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    background: #3a2f28;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cta {
+    display: block;
+    text-align: center;
+    background: #3a2f28;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 24px;
+  }
+  .setting-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .copy-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: #7b5d3e;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+  <a class="back-link" href="./brand-link.html">← ブランド一覧に戻る</a>
+
+  <h1>B happyご登録時のご案内</h1>
+
+  <div class="content">
+    <div class="box">
+      <p class="step-title">ご登録の流れ</p>
+      <div class="step-list">
+        <div class="step-item">B happy公式LINEを友だち追加してください</div>
+        <div class="step-item">トーク画面で、<span class="highlight">紹介コード</span>を入力して送信してください</div>
+        <div class="step-item">「新規会員登録はこちら」をタップして、案内に沿って登録を進めてください</div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="setting-row">
+        <span class="setting-label">紹介コード</span>
+        <span class="setting-value" id="referral-code">09057876557</span>
+        <button type="button" id="copy-code-btn" class="copy-btn">コピー</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <p class="step-title">画面イメージ</p>
+      <img class="screenshot" src="./images/bhappy_setting_screenshot.png" alt="B happy登録手順の画面イメージ">
+    </div>
+
+    <a class="cta" href="https://liff.line.me/1645278921-kWRPP32q/?accountId=734rgpys" target="_blank" rel="noopener">B happy公式LINEへ進む</a>
+  </div>
+
+
+<script>
+  const copyButton = document.getElementById("copy-code-btn");
+  let resetTimer;
+
+  copyButton.addEventListener("click", async function () {
+    const code = document.getElementById("referral-code").textContent.trim();
+
+    clearTimeout(resetTimer);
+
+    try {
+      await navigator.clipboard.writeText(code);
+      copyButton.textContent = "コピーしました！";
+    } catch (error) {
+      copyButton.textContent = "コピーできませんでした";
+    }
+
+    resetTimer = setTimeout(() => {
+      copyButton.textContent = "コピー";
+    }, 2000);
+  });
+</script>
+
+
+</body>
+</html>
